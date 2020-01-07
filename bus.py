@@ -5,9 +5,7 @@ import os
 from bs4 import BeautifulSoup
 from sty import fg, bg, ef, rs
 
-
 URL = "https://pid.cz/zastavkova-tabla/?stop=Hlavn%C3%AD&stanoviste=A"
-
 
 def get_data():
     r = requests.get(URL)
@@ -47,13 +45,14 @@ def get_data():
 
     clear = lambda: os.system('clear')
     clear()
-    print(fg.red + '(%s) ' % data[0][0] + fg.rs + '%s - ' % data[0][1] + fg.green + '%s min' % times[0] + fg.rs)
-    print(fg.red + '(%s) ' % data[2][0] + fg.rs + '%s - ' % data[2][1] + fg.green + '%s min' % times[1] + fg.rs)
-    print(fg.red + '(%s) ' % data[4][0] + fg.rs + '%s - ' % data[4][1] + fg.green + '%s min' % times[2] + fg.rs)
-    print(fg.red + '(%s) ' % data[6][0] + fg.rs + '%s - ' % data[6][1] + fg.green + '%s min' % times[3] + fg.rs)
-    print(fg.red + '(%s) ' % data[8][0] + fg.rs + '%s - ' % data[8][1] + fg.green + '%s min' % times[4] + fg.rs)
-    print(fg.red + '(%s) ' % data[10][0] + fg.rs + '%s - ' % data[10][1] + fg.green + '%s min' % times[5] + fg.rs)
-    print("========================")
+    
+    print("{:<40}{:>40} min".format(fg.red + str(data[0][0]) + fg.rs + ' ' + data[0][1], fg.green + str(times[0]) + fg.rs))
+    print("{:<40}{:>40} min".format(fg.red + str(data[2][0]) + fg.rs + ' ' + data[2][1], fg.green + str(times[1]) + fg.rs))
+    print("{:<40}{:>40} min".format(fg.red + str(data[4][0]) + fg.rs + ' ' + data[4][1], fg.green + str(times[2]) + fg.rs))
+    print("{:<40}{:>40} min".format(fg.red + str(data[6][0]) + fg.rs + ' ' + data[6][1], fg.green + str(times[3]) + fg.rs))
+    print("{:<40}{:>40} min".format(fg.red + str(data[8][0]) + fg.rs + ' ' + data[8][1], fg.green + str(times[4]) + fg.rs))
+    print("{:<40}{:>40} min".format(fg.red + str(data[10][0]) + fg.rs + ' ' + data[10][1], fg.green + str(times[5]) + fg.rs))
+    print("================================================================")
 
 while True:
     get_data()
