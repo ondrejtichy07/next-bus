@@ -1,6 +1,7 @@
 import requests
 import re
 import time
+import os
 from bs4 import BeautifulSoup
 from sty import fg, bg, ef, rs
 
@@ -44,7 +45,8 @@ def get_data():
         l = [int(s) for s in re.findall(r'\b\d+\b', str(data[i]))]
         times.append(l[0])
 
-
+    clear = lambda: os.system('clear')
+    clear()
     print(fg.red + '(%s) ' % data[0][0] + fg.rs + '%s - ' % data[0][1] + fg.green + '%s min' % times[0] + fg.rs)
     print(fg.red + '(%s) ' % data[2][0] + fg.rs + '%s - ' % data[2][1] + fg.green + '%s min' % times[1] + fg.rs)
     print(fg.red + '(%s) ' % data[4][0] + fg.rs + '%s - ' % data[4][1] + fg.green + '%s min' % times[2] + fg.rs)
