@@ -12,11 +12,8 @@ URL = "https://pid.cz/zastavkova-tabla/?stop=Hlavn%C3%AD&stanoviste=A"
 def get_data():
 
     try:
-        utc_dt = datetime.now(timezone.utc)
-        dt = utc_dt.astimezone()
         req = requests.get(URL)
         soup = BeautifulSoup(req.content, 'html.parser')
-        current_time = dt.strftime('%d.%m.%Y %H:%M:%S')
 
         table_body = soup.find('tbody')
         rows = table_body.find_all('tr')
@@ -49,6 +46,10 @@ def get_data():
 
         clear = lambda: os.system('clear')
         clear()
+
+        utc_dt = datetime.now(timezone.utc)
+        dt = utc_dt.astimezone()
+        current_time = dt.strftime('%d.%m.%Y %H:%M:%S')
 
         print(fg.red + current_time + fg.rs)
         print("================================================================")
