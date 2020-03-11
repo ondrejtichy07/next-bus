@@ -2,18 +2,21 @@ import requests
 import re
 import time
 import os
-import datetime
+from datetime import datetime, timezone
 from bs4 import BeautifulSoup
 from sty import fg, bg, ef, rs
+
 
 URL = "https://pid.cz/zastavkova-tabla/?stop=Hlavn%C3%AD&stanoviste=A"
 
 def get_data():
 
     try:
+        utc_dt = datetime.now(timezone.utc)
+        dt = utc_dt.astimezone()
         req = requests.get(URL)
         soup = BeautifulSoup(req.content, 'html.parser')
-        current_time = datetime.datetime.utcnow().strftime('%d.%m.%Y %H:%M:%S')
+        current_time = dt.strftime('%d.%m.%Y %H:%M:%S')
 
         table_body = soup.find('tbody')
         rows = table_body.find_all('tr')
@@ -48,7 +51,6 @@ def get_data():
         clear()
 
         print(fg.red + current_time + fg.rs)
-
         print("================================================================")
         print("{:<40}{:>40} min".format(fg.red + str(data[0][0]) + fg.rs + ' ' + data[0][1], fg.green + str(times[0]) + fg.rs))
         print("{:<40}{:>40} min".format(fg.red + str(data[2][0]) + fg.rs + ' ' + data[2][1], fg.green + str(times[1]) + fg.rs))
