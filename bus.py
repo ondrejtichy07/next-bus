@@ -67,4 +67,4 @@ def get_data():
 
 while True:
     get_data()
-    time.sleep(10)
+    time.sleep(15)
